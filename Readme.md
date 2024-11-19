@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм»
 
 * Студент: [Елена Покровская](https://up.htmlacademy.ru/javascript-individual/2/user/855585).
-* Наставник: `Дмитрий Беллавин`.
+* Наставник: [Дмитрий Беллавин](https://htmlacademy.ru/profile/bellavin).
 
 ---
 
