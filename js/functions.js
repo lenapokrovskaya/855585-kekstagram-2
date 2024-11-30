@@ -19,7 +19,7 @@ function extractNumbers (string) {
   string = String(string);
   let result = '';
   for (let i = 0; i < string.length; i++) {
-    if (!isNaN(parseInt(string[i]), 10)) {
+    if (!isNaN(parseInt(string[i], 10))) {
       result += string[i];
     }
   }
