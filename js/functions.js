@@ -1,10 +1,10 @@
-function checksStringLength (string, maxLength) {
+function checkStringLength (string, maxLength) {
   return string.length <= maxLength;
 }
 
-checksStringLength('проверяемая строка', 10);
+checkStringLength('проверяемая строка', 10);
 
-function palindromeChecking (string) {
+function checkPalindrome (string) {
   string = string.replaceAll(' ','').toLowerCase();
   let invertedString = '';
   for (let i = string.length - 1; i >= 0; i--) {
@@ -13,17 +13,17 @@ function palindromeChecking (string) {
   return invertedString === string;
 }
 
-palindromeChecking('Топот');
+checkPalindrome('Топот');
 
-function getsNumbers (string) {
-  string = string.toString();
+function extractNumbers (string) {
+  string = String(string);
   let result = '';
   for (let i = 0; i < string.length; i++) {
-    if (!isNaN(+string[i])) {
+    if (!isNaN(parseInt(string[i]), 10)) {
       result += string[i];
     }
   }
   return parseInt(result, 10);
 }
 
-getsNumbers(-22.3);
+extractNumbers('1 кефир, 0.5 батона');
