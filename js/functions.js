@@ -32,8 +32,8 @@ extractNumbers('1 кефир, 0.5 батона');
 const checkMeetingDuration = function (workStartTime, workEndTime, meetingStart, meetingDuration) {
 
   const convertHoursToMinutes = function (timeInHours) {
-    const timeParts = timeInHours.split(':');
-    return Number(timeParts[0]) * 60 + Number(timeParts[1]);
+    const [hours, minutes] = timeInHours.split(':');
+    return Number(hours) * 60 + Number(minutes);
   };
   const workStartTimeInMinutes = convertHoursToMinutes(workStartTime);
   const workEndTimeInMinutes = convertHoursToMinutes(workEndTime);
