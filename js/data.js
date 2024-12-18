@@ -75,17 +75,15 @@ const randomUniqueUrl = createUniqueRandomInteger(1, POST_COUNT);
 const randomUniqueСommentId = createUniqueRandomInteger(1, maxCommentsIdQuantity);
 
 //Функция, возвращающая случайный элемент массива
-const getRandomArrayElement = function (elements) {
-  return elements[getRandomInteger(0, elements.length - 1)];
-};
+const getRandomArrayElement = (elements) =>
+  elements[getRandomInteger(0, elements.length - 1)];
 
 //Функция, возращающая случайное число строк для комментариев
-const getRandomMessageLength = function() {
-  return getRandomInteger(MessageLength.MIN, MessageLength.MAX);
-};
+const getRandomMessageLength = () =>
+  getRandomInteger(MessageLength.MIN, MessageLength.MAX);
 
 //Функция, создающая объект комментария
-const createComment = function() {
+const createComment = () => {
   const messagesQuantity = [];
   while (messagesQuantity.length < getRandomMessageLength()) {
     messagesQuantity.push(getRandomArrayElement(MESSAGES));
@@ -99,7 +97,7 @@ const createComment = function() {
 };
 
 //Функция, создающая объект поста
-const createPost = function() {
+const createPost = () => {
   //Массив объектов комментариев
   const comments = Array.from({length: getRandomInteger(CommentsQuantity.MIN, CommentsQuantity.MAX)}, createComment);
   return {
@@ -112,9 +110,8 @@ const createPost = function() {
 };
 
 //Функция, создающая массив объектов постов
-const createPosts = function() {
-  return Array.from({length: POST_COUNT}, createPost);
-};
+const createPosts = () =>
+  Array.from({length: POST_COUNT}, createPost);
 
 export {createPosts};
 
