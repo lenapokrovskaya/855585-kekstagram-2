@@ -1,29 +1,28 @@
-import {createPosts} from './data.js';
-
-const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
-const pictureContainer = document.querySelector('.pictures');
-const pictureFragment = document.createDocumentFragment();
+const pictureTemplateElement = document.querySelector('#picture').content.querySelector('.picture');
+const pictureContainerElement = document.querySelector('.pictures');
+const pictureFragmentElement = document.createDocumentFragment();
 
 //Функция создания перевью
-const createThumbnail = function (picture) {
-  const pictureThumbnail = pictureTemplate.cloneNode(true);
-  const pictureImage = pictureThumbnail.querySelector('.picture__img');
-  pictureThumbnail.href = picture.url;
-  pictureThumbnail.dataset.id = picture.id;
-  pictureImage.src = picture.url;
-  pictureImage.alt = picture.description;
-  pictureThumbnail.querySelector('.picture__likes').textContent = picture.likes;
-  pictureThumbnail.querySelector('.picture__comments').textContent = picture.comments.length;
-  return pictureThumbnail;
+const createThumbnailElement = function (picture) {
+  const pictureThumbnailElement = pictureTemplateElement.cloneNode(true);
+  const pictureImageElement = pictureThumbnailElement.querySelector('.picture__img');
+  pictureThumbnailElement.href = picture.url;
+  pictureThumbnailElement.dataset.id = picture.id;
+  pictureImageElement.src = picture.url;
+  pictureImageElement.alt = picture.description;
+  pictureThumbnailElement.querySelector('.picture__likes').textContent = picture.likes;
+  pictureThumbnailElement.querySelector('.picture__comments').textContent = picture.comments.length;
+  return pictureThumbnailElement;
 };
 
-//Создадаем массив данных для превью
-const mokedPictures = createPosts();
+//Проходимся по массиву данных и создадим первью для каждого элемента функцией
+const createFragmentElement = function (data) {
+  data.forEach((picture) => {
+    const pictureThumbnailElement = createThumbnailElement(picture);
+    pictureFragmentElement.appendChild(pictureThumbnailElement);
+  });
 
-//Проходимся по массиву и создадим первью для каждого элемента функцией
-mokedPictures.forEach((picture) => {
-  const pictureThumbnail = createThumbnail(picture);
-  pictureFragment.appendChild(pictureThumbnail);
-});
+  pictureContainerElement.appendChild(pictureFragmentElement);
+};
 
-pictureContainer.appendChild(pictureFragment);
+export {createFragmentElement};
