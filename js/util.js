@@ -1,12 +1,12 @@
 //Функция, возвращающая случайное число в заданном диапазоне (включительно)
-const getRandomInteger = function(min, max) {
+const getRandomInteger = (min, max) => {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1) + min);
 };
 
 //Функция, возвращающая уникальные значения из заданного диапазона
-const createUniqueRandomInteger = function (min, max) {
+const createUniqueRandomInteger = (min, max) => {
   const previousValues = [];
   return function () {
     let currentValue = getRandomInteger(min, max);

@@ -1,4 +1,5 @@
 import {createPosts} from './data.js';
-import {createFragmentElement} from './thumbnails.js';
+import {createFragment} from './thumbnails.js';
 
-createFragmentElement(createPosts());
+const posts = createPosts();
+createFragment(posts);

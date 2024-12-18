@@ -1,28 +1,28 @@
-const pictureTemplateElement = document.querySelector('#picture').content.querySelector('.picture');
-const pictureContainerElement = document.querySelector('.pictures');
-const pictureFragmentElement = document.createDocumentFragment();
+const templateElement = document.querySelector('#picture').content.querySelector('.picture');
+const containerElement = document.querySelector('.pictures');
+const fragmentElement = document.createDocumentFragment();
 
 //Функция создания перевью
-const createThumbnailElement = function (picture) {
-  const pictureThumbnailElement = pictureTemplateElement.cloneNode(true);
-  const pictureImageElement = pictureThumbnailElement.querySelector('.picture__img');
-  pictureThumbnailElement.href = picture.url;
-  pictureThumbnailElement.dataset.id = picture.id;
-  pictureImageElement.src = picture.url;
-  pictureImageElement.alt = picture.description;
-  pictureThumbnailElement.querySelector('.picture__likes').textContent = picture.likes;
-  pictureThumbnailElement.querySelector('.picture__comments').textContent = picture.comments.length;
-  return pictureThumbnailElement;
+const createThumbnail = (picture) => {
+  const thumbnailElement = templateElement.cloneNode(true);
+  const imageElement = thumbnailElement.querySelector('.picture__img');
+  thumbnailElement.href = picture.url;
+  thumbnailElement.dataset.id = picture.id;
+  imageElement.src = picture.url;
+  imageElement.alt = picture.description;
+  thumbnailElement.querySelector('.picture__likes').textContent = picture.likes;
+  thumbnailElement.querySelector('.picture__comments').textContent = picture.comments.length;
+  return thumbnailElement;
 };
 
 //Проходимся по массиву данных и создадим первью для каждого элемента функцией
-const createFragmentElement = function (data) {
+const createFragment = (data) => {
   data.forEach((picture) => {
-    const pictureThumbnailElement = createThumbnailElement(picture);
-    pictureFragmentElement.appendChild(pictureThumbnailElement);
+    const thumbnailElement = createThumbnail(picture);
+    fragmentElement.appendChild(thumbnailElement);
   });
 
-  pictureContainerElement.appendChild(pictureFragmentElement);
+  containerElement.appendChild(fragmentElement);
 };
 
-export {createFragmentElement};
+export {createFragment};
