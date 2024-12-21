@@ -3,19 +3,19 @@ const socialCommentElement = сommentsListElement.querySelector('.social__commen
 const fragmentElement = document.createDocumentFragment();
 
 //Функция создания комментария
-const renderComment = (comment) => {
+const renderComment = ({avatar, name, message}) => {
   const clonedCommentElement = socialCommentElement.cloneNode(true);
-  const socialPicture = clonedCommentElement.querySelector('.social__picture');
-  const socialText = clonedCommentElement.querySelector('.social__text');
-  socialPicture.src = comment.avatar;
-  socialPicture.alt = comment.name;
-  socialText.textContent = comment.message;
+  const commentPictureElement = clonedCommentElement.querySelector('.social__picture');
+  const commentText = clonedCommentElement.querySelector('.social__text');
+  commentPictureElement.src = avatar;
+  commentPictureElement.alt = name;
+  commentText.textContent = message;
   return clonedCommentElement;
 };
 
 //Отрисуем массив комментариев для каждого поста
-const renderComments = (picture) => {
-  const postСomments = picture.comments;
+const renderComments = (comments) => {
+  const postСomments = comments;
   postСomments.forEach((comment) => {
     const commentElement = renderComment(comment);
     сommentsListElement.appendChild(commentElement);
@@ -28,3 +28,4 @@ const renderComments = (picture) => {
 
 
 export {renderComments};
+

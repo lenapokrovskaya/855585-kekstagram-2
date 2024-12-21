@@ -1,5 +1,5 @@
 import {isEscapeKey} from './util.js';
-import {renderBigPicture} from './ full-size-picture.js';
+import {renderBigPicture} from './full-size-picture.js';
 
 const renderModal = (posts) => {
   const bigPictureElement = document.body.querySelector('.big-picture');
@@ -63,4 +63,3 @@ const renderModal = (posts) => {
 };
 
 export {renderModal};
-

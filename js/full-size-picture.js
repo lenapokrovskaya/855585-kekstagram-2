@@ -1,4 +1,4 @@
-import {renderComments} from './comments';
+import {renderComments} from './comments.js';
 const bigPictureElement = document.body.querySelector('.big-picture');
 const imageElement = bigPictureElement.querySelector('img');
 const likesElement = bigPictureElement.querySelector('.likes-count');
@@ -7,12 +7,12 @@ const commentTotalCountElement = bigPictureElement.querySelector('.social__comme
 
 
 //Функция отрисовки поста в молаьном окне
-const renderBigPicture = (picture) => {
-  imageElement.src = picture.url;
-  likesElement.textContent = picture.likes;
-  commentTotalCountElement.textContent = picture.comments.length;
-  descriptionElement.textContent = picture.description;
-  renderComments(picture);
+const renderBigPicture = ({url, likes, comments, description}) => {
+  imageElement.src = url;
+  likesElement.textContent = likes;
+  commentTotalCountElement.textContent = comments.length;
+  descriptionElement.textContent = description;
+  renderComments(comments);
 };
 
 export {renderBigPicture};
