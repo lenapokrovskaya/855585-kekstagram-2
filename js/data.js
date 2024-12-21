@@ -113,5 +113,5 @@ const createPost = () => {
 const createPosts = () =>
   Array.from({length: POST_COUNT}, createPost);
 
-export {createPosts};
+export {createPosts, createComment};
 
