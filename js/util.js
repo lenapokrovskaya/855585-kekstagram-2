@@ -21,4 +21,7 @@ const createUniqueRandomInteger = (min, max) => {
   };
 };
 
-export {getRandomInteger, createUniqueRandomInteger};
+//Функция проверяющая клавиша esc или нет
+const isEscapeKey = (evt) => evt.key === 'Escape';
+
+export {getRandomInteger, createUniqueRandomInteger, isEscapeKey};
