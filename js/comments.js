@@ -32,7 +32,7 @@ const renderShownComments = () => {
     fragmentElement.appendChild(commentElement);
   });
 
-  socialCommentsElement.append(fragmentElement);
+  socialCommentsElement.appendChild(fragmentElement);
   commentShownCountElement.textContent = shownCommentsLength;
   commentTotalCountElement.textContent = currentPostComments.length;
   commentsLoaderElement.classList.toggle('hidden', shownCommentsLength >= currentPostComments.length);
