@@ -1,23 +1,24 @@
 import {isEscapeKey} from './util.js';
 import {renderBigPicture} from './full-size-picture.js';
+import {clearComments} from './comments.js';
 
 const renderModal = (posts) => {
   const bigPictureElement = document.body.querySelector('.big-picture');
   const picturesParentElement = document.querySelector('.pictures');
   const pictureCloseButton = bigPictureElement.querySelector('.big-picture__cancel');
-  const socialCommentCount = bigPictureElement.querySelector('.social__comment-count');
-  const commentsLoader = bigPictureElement.querySelector('.comments-loader');
+
 
   //Функция-обработчик закрытия модалки ESC
   const onModalEscKeyDown = (evt) => {
     if (isEscapeKey(evt)) {
       evt.preventDefault();
-      closeMоdal();
+      closeModal();
     }
   };
 
   //Функция закрытия модалки
-  function closeMоdal () {
+  function closeModal () {
+    clearComments();
     bigPictureElement.classList.add('hidden');
     //Удаляем обработчик закрытия превью ESC
     document.removeEventListener('keydown', onModalEscKeyDown);
@@ -29,7 +30,7 @@ const renderModal = (posts) => {
   const onCloseButtonClick = (button) => {
     button.addEventListener('click', (evt) => {
       evt.preventDefault();
-      closeMоdal();
+      closeModal();
     });
   };
 
@@ -53,9 +54,6 @@ const renderModal = (posts) => {
       const foundedPictureByIdElement = posts.find((picture) => picture.id === Number(currentPictureElement.dataset.pictureId));
       renderBigPicture(foundedPictureByIdElement);
       openModal();
-      // Скрываем блоки счетчика комментариев и загрузки новых комментариев
-      socialCommentCount.classList.add('hidden');
-      commentsLoader.classList.add('hidden');
     }
   };
 
