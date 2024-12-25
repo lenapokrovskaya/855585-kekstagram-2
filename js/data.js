@@ -72,7 +72,7 @@ const maxCommentsIdQuantity = 1000;
 
 const randomUniqueId = createUniqueRandomInteger(1, POST_COUNT);
 const randomUniqueUrl = createUniqueRandomInteger(1, POST_COUNT);
-const randomUniqueСommentId = createUniqueRandomInteger(1, maxCommentsIdQuantity);
+const randomUniqueCommentId = createUniqueRandomInteger(1, maxCommentsIdQuantity);
 
 //Функция, возвращающая случайный элемент массива
 const getRandomArrayElement = (elements) =>
@@ -89,7 +89,7 @@ const createComment = () => {
     messagesQuantity.push(getRandomArrayElement(MESSAGES));
   }
   return {
-    id: randomUniqueСommentId(),
+    id: randomUniqueCommentId(),
     avatar: `img/avatar-${getRandomInteger(AvatarsQuantity.MIN, AvatarsQuantity.MAX)}.svg`,
     message: messagesQuantity.join(' '),
     name: getRandomArrayElement(AUTORS),
