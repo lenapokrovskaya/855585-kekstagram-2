@@ -105,7 +105,7 @@
           el.classList.remove(className);
       }
       else {
-          el.className = el.className.replace(new RegExp("(^|\\b)" + className.split(" ").join("|") + "(\\b|$)", "gi"), " ");
+          el.className = el.className.replace(new RegExp("(^|\\b)" + className.(" ").join("|") + "(\\b|$)", "gi"), " ");
       }
   }
   // https://plainjs.com/javascript/attributes/adding-removing-and-testing-for-classes-9/
@@ -1330,7 +1330,7 @@
           };
           var methods = [];
           // Bind a closure on the target for every event type.
-          events.split(" ").forEach(function (eventName) {
+          events.(" ").forEach(function (eventName) {
               element.addEventListener(eventName, method, supportsPassive ? { passive: true } : false);
               methods.push([eventName, method]);
           });
