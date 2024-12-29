@@ -22,6 +22,7 @@ const renderModal = (posts) => {
     bigPictureElement.classList.add('hidden');
     //Удаляем обработчик закрытия превью ESC
     document.removeEventListener('keydown', onModalEscKeyDown);
+    picturesParentElement.removeEventListener('click', onThumbnailClick);
     //Удаляем класс,  чтобы контейнер с фото прокручивался
     document.body.classList.remove('modal-open');
   }
@@ -46,7 +47,7 @@ const renderModal = (posts) => {
   };
 
   //Функция обработчика клика, показывает модалку
-  const onThumbnailClick = (evt) => {
+  function onThumbnailClick (evt) {
     const currentPictureElement = evt.target.closest('.picture');
     if (currentPictureElement) {
       evt.preventDefault();
@@ -55,7 +56,7 @@ const renderModal = (posts) => {
       renderBigPicture(foundedPictureByIdElement);
       openModal();
     }
-  };
+  }
 
   picturesParentElement.addEventListener('click', onThumbnailClick);
 };
