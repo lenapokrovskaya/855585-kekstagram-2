@@ -15,8 +15,8 @@ const renderComment = ({avatar, name, message}) => {
   const clonedCommentElement = socialCommentElement.cloneNode(true);
   const commentPictureElement = clonedCommentElement.querySelector('.social__picture');
   const commentTextElement = clonedCommentElement.querySelector('.social__text');
-  commentPictureElement.src = avatar;
-  commentPictureElement.alt = name;
+  commentPictureElement.setAttribute('src', avatar);
+  commentPictureElement.setAttribute('alt', name);
   commentTextElement.textContent = message;
   return clonedCommentElement;
 };

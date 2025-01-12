@@ -4,7 +4,7 @@ const MAX_COMMENT_LENGTH = 140;
 const imgUploadFormElement = document.querySelector('.img-upload__form');
 const hashtagsInputElement = imgUploadFormElement.querySelector('.text__hashtags');
 const descriptionInutElement = imgUploadFormElement.querySelector('.text__description');
-const hashtagRegex = /^#[a-zа-яё0-9]{1,19}$/;
+const hashtagRegex = /^#[a-zа-яё0-9]{1,19}$/i;
 
 //Создали объект и передали конфиг
 const pristine = new Pristine(imgUploadFormElement, {
@@ -16,13 +16,13 @@ const pristine = new Pristine(imgUploadFormElement, {
 //Проверка длины комментария
 const validatesCommentLength = (value) => value.length >= 0 && value.length <= MAX_COMMENT_LENGTH;
 
-const getValues = (value) => value.toLowerCase().trim().split(' ');
+const getValues = (value) => value.trim().split(' ');
 
 //Проверка валиден ли хэштег
 const validatesHashtagWithRegex = (value) => {
   const values = getValues(value);
   const isValid = values.every((item) => hashtagRegex.test(item));
-  return isValid || value.toLowerCase().trim().length === 0;
+  return isValid || value.trim().length === 0;
 };
 
 //Проверка на ввод не более 5 хэштегов

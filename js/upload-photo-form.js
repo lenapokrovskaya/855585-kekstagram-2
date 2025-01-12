@@ -1,5 +1,6 @@
-import {isEscapeKey} from './util';
-import {onFormSubmit} from './form-validation';
+import {isEscapeKey} from './util.js';
+import {onFormSubmit} from './form-validation.js';
+import {onSliderEffectsChange, resetPhotoEditor} from './photo-editor.js';
 
 const bodyElement = document.body;
 const imgUploadFormElement = bodyElement.querySelector('.img-upload__form');
@@ -8,6 +9,7 @@ const hashtagsInputElement = imgUploadFormElement.querySelector('.text__hashtags
 const descriptionInutElement = imgUploadFormElement.querySelector('.text__description');
 const imgUploadOverlay = imgUploadFormElement.querySelector('.img-upload__overlay');
 const buttonUploadCancel = imgUploadFormElement.querySelector('.img-upload__cancel');
+const effectsElement = imgUploadFormElement.querySelector('.img-upload__effects');
 
 //Функция-обработчик закрытия формы по ESC
 const onDocumentKeydown = (evt) => {
@@ -33,6 +35,7 @@ function closeUploadForm() {
   document.removeEventListener('keydown', onDocumentKeydown);
   buttonUploadCancel.removeEventListener('click', onCloseButtonClick);
   imgUploadFormInput.value = '';
+  resetPhotoEditor();
 }
 
 //Открытие формы загрузки
@@ -40,9 +43,10 @@ const openUploadForm = () => {
   imgUploadFormInput.addEventListener('change', () => {
     imgUploadOverlay.classList.remove('hidden');
     bodyElement.classList.add('modal-open');
-    imgUploadFormElement.addEventListener('submit', onFormSubmit);//почему из без вызова работает
+    imgUploadFormElement.addEventListener('submit', onFormSubmit);
     document.addEventListener('keydown', onDocumentKeydown);
     buttonUploadCancel.addEventListener('click', onCloseButtonClick);
+    effectsElement.addEventListener('change', onSliderEffectsChange);
   });
 };
 

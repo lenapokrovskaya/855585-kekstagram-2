@@ -22,7 +22,6 @@ const renderModal = (posts) => {
     bigPictureElement.classList.add('hidden');
     //Удаляем обработчик закрытия превью ESC
     document.removeEventListener('keydown', onModalEscKeyDown);
-    picturesParentElement.removeEventListener('click', onThumbnailClick);
     //Удаляем класс,  чтобы контейнер с фото прокручивался
     document.body.classList.remove('modal-open');
   }
@@ -52,7 +51,7 @@ const renderModal = (posts) => {
     if (currentPictureElement) {
       evt.preventDefault();
       //Находим элемент из массива постов с таким же id как у текущего элемента
-      const foundedPictureByIdElement = posts.find((picture) => picture.id === Number(currentPictureElement.dataset.pictureId));
+      const foundedPictureByIdElement = posts.find((picture) => picture.id === Number(currentPictureElement.getAttribute('pictureId')));
       renderBigPicture(foundedPictureByIdElement);
       openModal();
     }
