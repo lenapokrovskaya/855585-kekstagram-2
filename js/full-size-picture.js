@@ -6,9 +6,9 @@ const descriptionElement = bigPictureElement.querySelector('.social__caption');
 const commentTotalCountElement = bigPictureElement.querySelector('.social__comment-total-count');
 
 
-//Функция отрисовки поста в молаьном окне
+//Функция отрисовки поста в модальном окне
 const renderBigPicture = ({url, likes, comments, description}) => {
-  imageElement.src = url;
+  imageElement.setAttribute('src', url);
   likesElement.textContent = likes;
   commentTotalCountElement.textContent = comments.length;
   descriptionElement.textContent = description;

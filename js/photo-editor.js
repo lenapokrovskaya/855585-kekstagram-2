@@ -8,9 +8,9 @@ const scaleControlInputElement = previewElement.querySelector('.scale__control--
 
 const imageElement = previewElement.querySelector('.img-upload__preview img');
 const sliderContainerElement = previewElement.querySelector('.img-upload__effect-level');
-const effectValue = previewElement.querySelector('.effect-level__value');
+const effectValueElement = previewElement.querySelector('.effect-level__value');
 const sliderElement = previewElement.querySelector('.effect-level__slider');
-const effectsButtons = document.querySelectorAll('.effects__radio');
+const effectsButtonElements = document.querySelectorAll('.effects__radio');
 
 const effectsOptions = {
   chrome: {
@@ -61,9 +61,9 @@ let currentScale = Number(scaleControlInputElement.value.slice(0, -1));
 const updateCurrentScale = () => {
   scaleControlInputElement.value = `${currentScale}%`;
   if (currentScale === MAX_SCALE) {
-    imageElement.style.transform = 'scale(1)';
+    imageElement.style.setProperty('transform', 'scale(1)');
   } else {
-    imageElement.style.transform = `scale(0.${currentScale})`;
+    imageElement.style.setProperty('transform', `scale(0.${currentScale})`);
   }
 };
 
@@ -119,7 +119,8 @@ const updateSliderOptions = (effectOptions) => {
 
 //Функция обновления стилей эффекта
 const updateSliderValue = (cssProperty, cssUnit) => {
-  imageElement.style.filter = `${cssProperty}(${effectValue.value}${cssUnit})`;
+  imageElement.style.setProperty('filter', `${cssProperty}(${effectValueElement.value}${cssUnit})`);
+
 };
 
 //Функция применения настроек эффекта
@@ -130,14 +131,14 @@ const onSliderEffectsChange = (evt) => {
     updateSliderOptions(effectsOptions[checkedEffectButton.value]);
   } else {
     sliderContainerElement.classList.add('hidden');
-    imageElement.style.filter = '';
+    imageElement.style.setProperty('filter', '');
   }
 };
 
 //Обновение значений при перестаскивании ползунка
 sliderElement.noUiSlider.on('update', () => {
-  effectValue.value = sliderElement.noUiSlider.get();
-  effectsButtons.forEach((button) => {
+  effectValueElement.value = sliderElement.noUiSlider.get();
+  effectsButtonElements.forEach((button) => {
     if (button.checked) {
       if (button.value !== 'none') {
         updateSliderValue(effectsOptions[button.value].property, effectsOptions[button.value].unit);
@@ -149,10 +150,10 @@ sliderElement.noUiSlider.on('update', () => {
 //Функция сброса фоторедактора
 const resetPhotoEditor = () => {
   currentScale = MAX_SCALE;
-  imageElement.style.transform = 'scale(1)';
+  imageElement.style.setProperty('transform', 'scale(1)');
   sliderElement.noUiSlider.reset();
   sliderContainerElement.classList.add('hidden');
-  imageElement.style.filter = '';
+  imageElement.style.setProperty('filter', '');
 };
 
 scaleControlBiggerElement.addEventListener('click', onBiggerControlClick);
