@@ -1,5 +1,4 @@
 import {isEscapeKey} from './util.js';
-import {onFormSubmit} from './form-validation.js';
 import {onSliderEffectsChange, resetPhotoEditor} from './photo-editor.js';
 
 const bodyElement = document.body;
@@ -31,7 +30,6 @@ const onCloseButtonClick = () => closeUploadForm();
 function closeUploadForm() {
   imgUploadOverlay.classList.add('hidden');
   bodyElement.classList.remove('modal-open');
-  imgUploadFormElement.removeEventListener('submit', onFormSubmit);
   document.removeEventListener('keydown', onDocumentKeydown);
   buttonUploadCancel.removeEventListener('click', onCloseButtonClick);
   imgUploadFormInput.value = '';
@@ -43,11 +41,10 @@ const openUploadForm = () => {
   imgUploadFormInput.addEventListener('change', () => {
     imgUploadOverlay.classList.remove('hidden');
     bodyElement.classList.add('modal-open');
-    imgUploadFormElement.addEventListener('submit', onFormSubmit);
     document.addEventListener('keydown', onDocumentKeydown);
     buttonUploadCancel.addEventListener('click', onCloseButtonClick);
     effectsElement.addEventListener('change', onSliderEffectsChange);
   });
 };
 
-export {openUploadForm};
+export {openUploadForm, closeUploadForm, onDocumentKeydown};

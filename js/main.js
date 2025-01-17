@@ -1,10 +1,7 @@
-import {createPosts} from './data.js';
-import {createFragment} from './thumbnails.js';
-import {renderModal} from './modal.js';
-import {openUploadForm} from './upload-photo-form.js';
+import {openUploadForm, closeUploadForm} from './upload-photo-form.js';
+import {setUserFormSubmit} from './form-validation.js';
+import {getData} from './api.js';
 
-const posts = createPosts();
-createFragment(posts);
-renderModal(posts);
+getData();
 openUploadForm();
-
+setUserFormSubmit(closeUploadForm);

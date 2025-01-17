@@ -1,7 +1,9 @@
+import {sendData} from './api.js';
 const MAX_HASHTAGS = 5;
 const MAX_COMMENT_LENGTH = 140;
 
 const imgUploadFormElement = document.querySelector('.img-upload__form');
+const submitButton = imgUploadFormElement.querySelector('.img-upload__submit');
 const hashtagsInputElement = imgUploadFormElement.querySelector('.text__hashtags');
 const descriptionInutElement = imgUploadFormElement.querySelector('.text__description');
 const hashtagRegex = /^#[a-zа-яё0-9]{1,19}$/i;
@@ -35,18 +37,35 @@ const validatesHashtagRepeats = (value) => {
   return duplicates.length === 0;
 };
 
+const blockSubmitButton = () => {
+  submitButton.disabled = true;
+};
+
+const unblockSubmitButton = () => {
+  submitButton.disabled = false;
+};
+
+const setUserFormSubmit = (onSuccess) => {
+  imgUploadFormElement.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+    const isValid = pristine.validate(); // Проверка валидности формы
+
+    if (isValid) {
+      blockSubmitButton();
+      const formData = new FormData(evt.target);
+      const sendDataPromise = sendData(formData);
+      sendDataPromise
+        .then(onSuccess)
+        .catch(() => {
+        })
+        .finally(unblockSubmitButton);
+    }
+  });
+};
+
 pristine.addValidator(hashtagsInputElement, validatesHashtagCount, 'Превышено количество хэштегов');
 pristine.addValidator(hashtagsInputElement, validatesHashtagWithRegex, 'Введён невалидный хэштег');
 pristine.addValidator(hashtagsInputElement, validatesHashtagRepeats, 'Хэштеги повторяются');
 pristine.addValidator(descriptionInutElement, validatesCommentLength, `Длина комментария больше ${MAX_COMMENT_LENGTH} символов`);
 
-const onFormSubmit = (evt) => {
-  evt.preventDefault();
-  const isValid = pristine.validate();
-  if (isValid) {
-    evt.target.submit();
-  }
-};
-
-export {onFormSubmit};
-
+export {setUserFormSubmit};
