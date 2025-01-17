@@ -3,14 +3,14 @@ import {isEscapeKey} from './util.js';
 const bodyElement = document.body;
 const fragmentElement = document.createDocumentFragment();
 const templateErrorElement = bodyElement.querySelector('#error').content.querySelector('.error');
-const errorElement = templateErrorElement.cloneNode(true);///
-const errorButton = errorElement.querySelector('.error__button');
-const errorBlock = errorElement.querySelector('.error__inner');
+const errorElement = templateErrorElement.cloneNode(true);
+const errorButtonElement = errorElement.querySelector('.error__button');
+const errorBlockElement = errorElement.querySelector('.error__inner');
 
 const templateSuccessElement = bodyElement.querySelector('#success').content.querySelector('.success');
 const successElement = templateSuccessElement.cloneNode(true);
-const successButton = successElement.querySelector('.success__button');
-const successBlock = successElement.querySelector('.success__inner');
+const successButtonElement = successElement.querySelector('.success__button');
+const successBlockElement = successElement.querySelector('.success__inner');
 
 const showDataError = (error) => {
   fragmentElement.appendChild(error);
@@ -47,18 +47,18 @@ const onOverlayClick = (evt, messageBlock, element) => {
 const showError = () => {
   fragmentElement.appendChild(errorElement);
   bodyElement.append(fragmentElement);
-  errorButton.addEventListener('click', () => onClickCloseMessage(errorElement));
+  errorButtonElement.addEventListener('click', () => onClickCloseMessage(errorElement));
   document.addEventListener('keydown', (evt) => onEscCloseMessage(evt, errorElement));
-  document.addEventListener('click', (evt) => onOverlayClick(evt, errorBlock, errorElement));
+  document.addEventListener('click', (evt) => onOverlayClick(evt, errorBlockElement, errorElement));
 };
 
 //Показ сообщения об успехе отправки данных
 const showSuccess = () => {
   fragmentElement.appendChild(successElement);
   bodyElement.append(fragmentElement);
-  successButton.addEventListener('click', () => onClickCloseMessage(successElement));
+  successButtonElement.addEventListener('click', () => onClickCloseMessage(successElement));
   document.addEventListener('keydown', (evt) => onEscCloseMessage(evt, successElement));
-  document.addEventListener('click', (evt) => onOverlayClick(evt, successBlock, successElement));
+  document.addEventListener('click', (evt) => onOverlayClick(evt, successBlockElement, successElement));
 };
 
 export {showDataError, showError, showSuccess};

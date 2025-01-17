@@ -1,12 +1,19 @@
 import {sendData} from './api.js';
+import {showError, showSuccess} from './notifications.js';
+
 const MAX_HASHTAGS = 5;
 const MAX_COMMENT_LENGTH = 140;
 
-const imgUploadFormElement = document.querySelector('.img-upload__form');
-const submitButton = imgUploadFormElement.querySelector('.img-upload__submit');
+const bodyElement = document.body;
+const imgUploadFormElement = bodyElement.querySelector('.img-upload__form');
+const submitButtonElement = imgUploadFormElement.querySelector('.img-upload__submit');
+const templateErrorElement = bodyElement.querySelector('#error').content.querySelector('.error');
+const errorElement = templateErrorElement.cloneNode(true);
+
 const hashtagsInputElement = imgUploadFormElement.querySelector('.text__hashtags');
 const descriptionInutElement = imgUploadFormElement.querySelector('.text__description');
 const hashtagRegex = /^#[a-zа-яё0-9]{1,19}$/i;
+
 
 //Создали объект и передали конфиг
 const pristine = new Pristine(imgUploadFormElement, {
@@ -38,11 +45,11 @@ const validatesHashtagRepeats = (value) => {
 };
 
 const blockSubmitButton = () => {
-  submitButton.disabled = true;
+  submitButtonElement.disabled = true;
 };
 
 const unblockSubmitButton = () => {
-  submitButton.disabled = false;
+  submitButtonElement.disabled = false;
 };
 
 const setUserFormSubmit = (onSuccess) => {
@@ -55,8 +62,13 @@ const setUserFormSubmit = (onSuccess) => {
       const formData = new FormData(evt.target);
       const sendDataPromise = sendData(formData);
       sendDataPromise
+        .then(() => {
+          showSuccess();
+          imgUploadFormElement.reset();
+        })
         .then(onSuccess)
         .catch(() => {
+          showError(errorElement);
         })
         .finally(unblockSubmitButton);
     }

@@ -3,7 +3,7 @@ import {onSliderEffectsChange, resetPhotoEditor} from './photo-editor.js';
 
 const bodyElement = document.body;
 const imgUploadFormElement = bodyElement.querySelector('.img-upload__form');
-const imgUploadFormInput = imgUploadFormElement.querySelector('.img-upload__input');
+const imgUploadFormInputElement = imgUploadFormElement.querySelector('.img-upload__input');
 const hashtagsInputElement = imgUploadFormElement.querySelector('.text__hashtags');
 const descriptionInutElement = imgUploadFormElement.querySelector('.text__description');
 const imgUploadOverlay = imgUploadFormElement.querySelector('.img-upload__overlay');
@@ -32,13 +32,13 @@ function closeUploadForm() {
   bodyElement.classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeydown);
   buttonUploadCancel.removeEventListener('click', onCloseButtonClick);
-  imgUploadFormInput.value = '';
+  imgUploadFormInputElement.value = '';
   resetPhotoEditor();
 }
 
 //Открытие формы загрузки
 const openUploadForm = () => {
-  imgUploadFormInput.addEventListener('change', () => {
+  imgUploadFormInputElement.addEventListener('change', () => {
     imgUploadOverlay.classList.remove('hidden');
     bodyElement.classList.add('modal-open');
     document.addEventListener('keydown', onDocumentKeydown);
