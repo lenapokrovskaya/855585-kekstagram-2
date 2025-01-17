@@ -7,7 +7,7 @@ const imgUploadFormInputElement = imgUploadFormElement.querySelector('.img-uploa
 const hashtagsInputElement = imgUploadFormElement.querySelector('.text__hashtags');
 const descriptionInutElement = imgUploadFormElement.querySelector('.text__description');
 const imgUploadOverlay = imgUploadFormElement.querySelector('.img-upload__overlay');
-const buttonUploadCancel = imgUploadFormElement.querySelector('.img-upload__cancel');
+const buttonUploadCancelElement = imgUploadFormElement.querySelector('.img-upload__cancel');
 const effectsElement = imgUploadFormElement.querySelector('.img-upload__effects');
 
 //Функция-обработчик закрытия формы по ESC
@@ -31,7 +31,7 @@ function closeUploadForm() {
   imgUploadOverlay.classList.add('hidden');
   bodyElement.classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeydown);
-  buttonUploadCancel.removeEventListener('click', onCloseButtonClick);
+  buttonUploadCancelElement.removeEventListener('click', onCloseButtonClick);
   imgUploadFormInputElement.value = '';
   resetPhotoEditor();
 }
@@ -42,7 +42,7 @@ const openUploadForm = () => {
     imgUploadOverlay.classList.remove('hidden');
     bodyElement.classList.add('modal-open');
     document.addEventListener('keydown', onDocumentKeydown);
-    buttonUploadCancel.addEventListener('click', onCloseButtonClick);
+    buttonUploadCancelElement.addEventListener('click', onCloseButtonClick);
     effectsElement.addEventListener('change', onSliderEffectsChange);
   });
 };
