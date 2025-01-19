@@ -5,7 +5,7 @@ import {clearComments} from './comments.js';
 const renderModal = (posts) => {
   const bigPictureElement = document.body.querySelector('.big-picture');
   const picturesParentElement = document.querySelector('.pictures');
-  const pictureCloseButton = bigPictureElement.querySelector('.big-picture__cancel');
+  const pictureCloseButtonElement = bigPictureElement.querySelector('.big-picture__cancel');
 
 
   //Функция-обработчик закрытия модалки ESC
@@ -34,7 +34,7 @@ const renderModal = (posts) => {
     });
   };
 
-  onCloseButtonClick(pictureCloseButton);
+  onCloseButtonClick(pictureCloseButtonElement);
 
   //Функция открытия модалки
   const openModal = () => {
@@ -51,7 +51,7 @@ const renderModal = (posts) => {
     if (currentPictureElement) {
       evt.preventDefault();
       //Находим элемент из массива постов с таким же id как у текущего элемента
-      const foundedPictureByIdElement = posts.find((picture) => picture.id === Number(currentPictureElement.getAttribute('pictureId')));
+      const foundedPictureByIdElement = posts.find((picture) => picture.id === Number(currentPictureElement.getAttribute('data-picture-id')));
       renderBigPicture(foundedPictureByIdElement);
       openModal();
     }

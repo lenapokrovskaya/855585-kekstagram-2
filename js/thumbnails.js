@@ -7,7 +7,7 @@ const createThumbnail = ({id, url, description, likes, comments}) => {
   const thumbnailElement = templateElement.cloneNode(true);
   const imageElement = thumbnailElement.querySelector('.picture__img');
   thumbnailElement.setAttribute('href','');
-  thumbnailElement.setAttribute('pictureId', id);
+  thumbnailElement.setAttribute('data-picture-id', id);
   imageElement.setAttribute('src', url);
   imageElement.setAttribute('alt', description);
   thumbnailElement.querySelector('.picture__likes').textContent = likes;
