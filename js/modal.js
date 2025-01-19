@@ -51,7 +51,7 @@ const renderModal = (posts) => {
     if (currentPictureElement) {
       evt.preventDefault();
       //Находим элемент из массива постов с таким же id как у текущего элемента
-      const foundedPictureByIdElement = posts.find((picture) => picture.id === Number(currentPictureElement.getAttribute('pictureId')));
+      const foundedPictureByIdElement = posts.find((picture) => picture.id === Number(currentPictureElement.getAttribute('data-picture-id')));
       renderBigPicture(foundedPictureByIdElement);
       openModal();
     }

@@ -14,12 +14,19 @@ const effectsElement = imgUploadFormElement.querySelector('.img-upload__effects'
 const onDocumentKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
+
     if (document.activeElement === hashtagsInputElement || document.activeElement === descriptionInutElement) {
       evt.stopPropagation();
-    } else {
-      closeUploadForm();
-      imgUploadFormElement.reset();
+      return;
     }
+
+    const errorModal = document.querySelector('.error');
+    if (errorModal) {
+      return;
+    }
+
+    closeUploadForm();
+    imgUploadFormElement.reset();
   }
 };
 
@@ -30,9 +37,7 @@ const onCloseButtonClick = () => closeUploadForm();
 function closeUploadForm() {
   imgUploadOverlay.classList.add('hidden');
   bodyElement.classList.remove('modal-open');
-  document.removeEventListener('keydown', onDocumentKeydown);
   buttonUploadCancelElement.removeEventListener('click', onCloseButtonClick);
-  imgUploadFormInputElement.value = '';
   resetPhotoEditor();
 }
 
