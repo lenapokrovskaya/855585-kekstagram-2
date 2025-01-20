@@ -39,7 +39,7 @@ const validatesHashtagCount = (value) => getValues(value).length <= MAX_HASHTAGS
 
 //Проверка на повтор хэштегов
 const validatesHashtagRepeats = (value) => {
-  const duplicates = getValues(value).filter((number, index, numbers) =>
+  const duplicates = getValues(value.toLowerCase()).filter((number, index, numbers) =>
     numbers.indexOf(number) !== index);
   return duplicates.length === 0;
 };

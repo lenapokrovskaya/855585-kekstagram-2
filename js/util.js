@@ -24,9 +24,6 @@ const createUniqueRandomInteger = (min, max) => {
 //Функция проверяющая клавиша esc или нет
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
-const getRandomArrayElement = (elements) =>
-  elements[getRandomInteger(0, elements.length - 1)];
-
 function debounce (callback, timeoutDelay = 500) {
   // Используем замыкания, чтобы id таймаута у нас навсегда приклеился
   // к возвращаемой функции с setTimeout, тогда мы его сможем перезаписывать
@@ -45,4 +42,4 @@ function debounce (callback, timeoutDelay = 500) {
   };
 }
 
-export {getRandomInteger, createUniqueRandomInteger, isEscapeKey, getRandomArrayElement, debounce};
+export {getRandomInteger, createUniqueRandomInteger, isEscapeKey, debounce};
