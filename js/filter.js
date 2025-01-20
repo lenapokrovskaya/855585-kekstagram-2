@@ -1,6 +1,5 @@
 import {createFragment} from './thumbnails.js';
 import {renderModal} from './modal.js';
-import {getRandomArrayElement} from './util.js';
 import {debounce} from './util.js';
 
 const POST_COUNT = 10;
@@ -9,9 +8,6 @@ const RERENDER_DELAY = 500;
 const imgFiltersForm = document.querySelector('.img-filters__form');
 const buttonsElements = imgFiltersForm.querySelectorAll('.img-filters__button');
 
-const getRandomPosts = (postArray) =>
-  postArray.slice(0, POST_COUNT).map(() => getRandomArrayElement(postArray));
-
 const updatePosts = (posts) => {
   const pictureElements = document.querySelectorAll('.picture');
   pictureElements.forEach((el) => el.remove());
@@ -19,7 +15,7 @@ const updatePosts = (posts) => {
   renderModal(posts);
 };
 
-const onChangeFilterPosts = (data) => {
+const onChangeFilterPosts = (pictures) => {
   imgFiltersForm.addEventListener('click', (evt) => {
     const targetButton = evt.target.closest('.img-filters__button');
     if (targetButton) {
@@ -28,19 +24,19 @@ const onChangeFilterPosts = (data) => {
 
       switch (evt.target.id) {
         case 'filter-default':
-          debounce(() => updatePosts(data), RERENDER_DELAY)();
+          debounce(() => updatePosts(pictures), RERENDER_DELAY)();
           break;
 
         case 'filter-random':
-          debounce(() => updatePosts(getRandomPosts(data), RERENDER_DELAY))();
+          debounce(() => updatePosts(pictures.toSorted(() => 0.5 - Math.random()).slice(0, POST_COUNT)), RERENDER_DELAY)();
           break;
 
         case 'filter-discussed':
-          debounce(() => updatePosts(data.toSorted((a, b) => b.comments.length - a.comments.length)), RERENDER_DELAY)();
+          debounce(() => updatePosts(pictures.toSorted((pictureA, pictureB) => pictureB.comments.length - pictureA.comments.length)), RERENDER_DELAY)();
           break;
       }
     }
   });
 };
 
-export {getRandomPosts, onChangeFilterPosts};
+export {onChangeFilterPosts};
