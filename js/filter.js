@@ -9,7 +9,7 @@ const RERENDER_DELAY = 500;
 const imgFiltersForm = document.querySelector('.img-filters__form');
 const buttonsElements = imgFiltersForm.querySelectorAll('.img-filters__button');
 
-const getRandomPost = (postArray) =>
+const getRandomPosts = (postArray) =>
   postArray.slice(0, POST_COUNT).map(() => getRandomArrayElement(postArray));
 
 const updatePosts = (posts) => {
@@ -19,7 +19,7 @@ const updatePosts = (posts) => {
   renderModal(posts);
 };
 
-const onChangefilterPosts = (data) => {
+const onChangeFilterPosts = (data) => {
   imgFiltersForm.addEventListener('click', (evt) => {
     const targetButton = evt.target.closest('.img-filters__button');
     if (targetButton) {
@@ -32,7 +32,7 @@ const onChangefilterPosts = (data) => {
           break;
 
         case 'filter-random':
-          debounce(() => updatePosts(getRandomPost(data), RERENDER_DELAY))();
+          debounce(() => updatePosts(getRandomPosts(data), RERENDER_DELAY))();
           break;
 
         case 'filter-discussed':
@@ -43,4 +43,4 @@ const onChangefilterPosts = (data) => {
   });
 };
 
-export {getRandomPost, onChangefilterPosts};
+export {getRandomPosts, onChangeFilterPosts};
