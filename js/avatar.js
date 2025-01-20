@@ -6,9 +6,7 @@ const uploadFileInputElement = document.querySelector('#upload-file');
 
 uploadFileInputElement.addEventListener('change', () => {
   const file = uploadFileInputElement.files[0];
-  //получаем имя файла через name и приводим к одному виду
   const fileName = file.name.toLowerCase();
-  //Делаем проверку совпадает ли имя нашего файла с допустимыми
   const matches = FILE_TYPES.some((item) => fileName.endsWith(item));
 
   if(matches) {
