@@ -63,10 +63,10 @@ const setUserFormSubmit = (onSuccess) => {
       const sendDataPromise = sendData(formData);
       sendDataPromise
         .then(() => {
-          showSuccess();
           imgUploadFormElement.reset();
+          showSuccess();
+          onSuccess();
         })
-        .then(onSuccess)
         .catch(() => {
           showError(errorElement);
         })
@@ -75,9 +75,11 @@ const setUserFormSubmit = (onSuccess) => {
   });
 };
 
+const resetValidator = () => pristine.reset();
+
 pristine.addValidator(hashtagsInputElement, validatesHashtagCount, 'Превышено количество хэштегов');
 pristine.addValidator(hashtagsInputElement, validatesHashtagWithRegex, 'Введён невалидный хэштег');
 pristine.addValidator(hashtagsInputElement, validatesHashtagRepeats, 'Хэштеги повторяются');
 pristine.addValidator(descriptionInutElement, validatesCommentLength, `Длина комментария больше ${MAX_COMMENT_LENGTH} символов`);
 
-export {setUserFormSubmit};
+export {setUserFormSubmit, resetValidator};
