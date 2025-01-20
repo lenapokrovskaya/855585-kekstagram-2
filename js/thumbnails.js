@@ -2,6 +2,7 @@ const templateElement = document.querySelector('#picture').content.querySelector
 const containerElement = document.querySelector('.pictures');
 const fragmentElement = document.createDocumentFragment();
 
+
 //Функция создания перевью
 const createThumbnail = ({id, url, description, likes, comments}) => {
   const thumbnailElement = templateElement.cloneNode(true);
