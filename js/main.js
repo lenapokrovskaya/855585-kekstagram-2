@@ -5,6 +5,7 @@ import {createFragment} from './thumbnails.js';
 import {renderModal} from './modal.js';
 import {showDataError} from './notifications.js';
 import {onChangeFilterPosts} from './filter.js';
+import './avatar.js';
 
 const ERROR_DISPLAY_TIME = 5000;
 const templateDataErrorElement = document.querySelector('#data-error').content.querySelector('.data-error');
