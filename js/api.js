@@ -11,8 +11,8 @@ const Method = {
 };
 
 const ErrorText = {
-  GET_DATA: 'Не удалось загрузить данные.',
-  SEND_DATA: 'Не удалось отправить форму.',
+  GET_DATA: 'Не удалось загрузить данные',
+  SEND_DATA: 'Не удалось отправить форму',
 };
 
 const load = (route, errorText, method = Method.GET, body = null) =>

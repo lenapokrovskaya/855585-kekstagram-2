@@ -7,7 +7,6 @@ const renderModal = (posts) => {
   const picturesParentElement = document.querySelector('.pictures');
   const pictureCloseButtonElement = bigPictureElement.querySelector('.big-picture__cancel');
 
-  //Функция-обработчик закрытия модалки ESC
   const onModalEscKeyDown = (evt) => {
     if (isEscapeKey(evt)) {
       evt.preventDefault();
@@ -15,17 +14,13 @@ const renderModal = (posts) => {
     }
   };
 
-  //Функция закрытия модалки
   function closeModal () {
     clearComments();
     bigPictureElement.classList.add('hidden');
-    //Удаляем обработчик закрытия превью ESC
     document.removeEventListener('keydown', onModalEscKeyDown);
-    //Удаляем класс,  чтобы контейнер с фото прокручивался
     document.body.classList.remove('modal-open');
   }
 
-  //Функция закрытия модалки по нажатию на кнопку
   const onCloseButtonClick = (button) => {
     button.addEventListener('click', (evt) => {
       evt.preventDefault();
@@ -35,16 +30,12 @@ const renderModal = (posts) => {
 
   onCloseButtonClick(pictureCloseButtonElement);
 
-  //Функция открытия модалки
   const openModal = () => {
     bigPictureElement.classList.remove('hidden');
-    //Добавляем обработчик закрытия превью ESC
     document.addEventListener('keydown', onModalEscKeyDown);
-    //Добавляем класс, чтобы контейнер с фото не прокручивался
     document.body.classList.add('modal-open');
   };
 
-  //Функция обработчика клика, показывает модалку
   function onThumbnailClick (evt) {
     const currentPictureElement = evt.target.closest('.picture');
     if (currentPictureElement) {

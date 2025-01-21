@@ -1,11 +1,11 @@
-//Функция, возвращающая случайное число в заданном диапазоне (включительно)
+const RERENDER_DELAY = 500;
+
 const getRandomInteger = (min, max) => {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1) + min);
 };
 
-//Функция, возвращающая уникальные значения из заданного диапазона
 const createUniqueRandomInteger = (min, max) => {
   const previousValues = [];
   return function () {
@@ -21,10 +21,9 @@ const createUniqueRandomInteger = (min, max) => {
   };
 };
 
-//Функция проверяющая клавиша esc или нет
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
-function debounce (callback, timeoutDelay) {
+function debounce (callback, timeoutDelay = RERENDER_DELAY) {
   let timeoutId;
 
   return (...rest) => {

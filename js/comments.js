@@ -10,7 +10,6 @@ const commentShownCountElement = bigPictureElement.querySelector('.social__comme
 const commentsLoaderElement = bigPictureElement.querySelector('.social__comments-loader');
 socialCommentsElement.innerHTML = '';
 
-//Функция создания комментария
 const renderComment = ({avatar, name, message}) => {
   const clonedCommentElement = socialCommentElement.cloneNode(true);
   const commentPictureElement = clonedCommentElement.querySelector('.social__picture');
@@ -21,7 +20,6 @@ const renderComment = ({avatar, name, message}) => {
   return clonedCommentElement;
 };
 
-//Функция отрисовки показываемых комментариев частями
 const renderShownComments = () => {
   const fragmentElement = document.createDocumentFragment();
   const shownComments = currentPostComments.slice(currentCommentCount, currentCommentCount + STEP_COMMENTS);
@@ -39,14 +37,12 @@ const renderShownComments = () => {
   currentCommentCount += STEP_COMMENTS;
 };
 
-//Функция отрисовки и обновления по клику количества комментариев
 const renderComments = (comments) => {
   currentPostComments = comments;
   renderShownComments();
   commentsLoaderElement.addEventListener('click', renderShownComments);
 };
 
-//Функция очистки комментариев
 const clearComments = () => {
   currentCommentCount = 0;
   socialCommentsElement.innerHTML = '';

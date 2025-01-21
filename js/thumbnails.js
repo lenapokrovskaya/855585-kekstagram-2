@@ -2,8 +2,6 @@ const templateElement = document.querySelector('#picture').content.querySelector
 const containerElement = document.querySelector('.pictures');
 const fragmentElement = document.createDocumentFragment();
 
-
-//Функция создания перевью
 const createThumbnail = ({id, url, description, likes, comments}) => {
   const thumbnailElement = templateElement.cloneNode(true);
   const imageElement = thumbnailElement.querySelector('.picture__img');
@@ -16,8 +14,7 @@ const createThumbnail = ({id, url, description, likes, comments}) => {
   return thumbnailElement;
 };
 
-//Проходимся по массиву данных и создадим первью для каждого элемента функцией
-const createFragment = (posts) => {
+const createThumbnails = (posts) => {
   posts.forEach((picture) => {
     const thumbnailElement = createThumbnail(picture);
     fragmentElement.appendChild(thumbnailElement);
@@ -26,4 +23,4 @@ const createFragment = (posts) => {
   containerElement.appendChild(fragmentElement);
 };
 
-export {createFragment};
+export {createThumbnails};

@@ -15,29 +15,24 @@ const hashtagsInputElement = imgUploadFormElement.querySelector('.text__hashtags
 const descriptionInutElement = imgUploadFormElement.querySelector('.text__description');
 const hashtagRegex = /^#[a-zа-яё0-9]{1,19}$/i;
 
-//Создали объект и передали конфиг
 const pristine = new Pristine(imgUploadFormElement, {
   classTo: 'img-upload__field-wrapper',
   errorClass: 'img-upload__field-wrapper--error',
   errorTextParent: 'img-upload__field-wrapper',
 });
 
-//Проверка длины комментария
 const validatesCommentLength = (value) => value.length >= 0 && value.length <= MAX_COMMENT_LENGTH;
 
 const getValues = (value) => value.trim().split(/ +/g);
 
-//Проверка валиден ли хэштег
 const validatesHashtagWithRegex = (value) => {
   const values = getValues(value);
   const isValid = values.every((item) => hashtagRegex.test(item));
   return isValid || value.trim().length === 0;
 };
 
-//Проверка на ввод не более 5 хэштегов
 const validatesHashtagCount = (value) => getValues(value).length <= MAX_HASHTAGS;
 
-//Проверка на повтор хэштегов
 const validatesHashtagRepeats = (value) => {
   const duplicates = getValues(value.toLowerCase()).filter((number, index, numbers) =>
     numbers.indexOf(number) !== index);

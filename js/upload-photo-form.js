@@ -11,7 +11,6 @@ const imgUploadOverlay = imgUploadFormElement.querySelector('.img-upload__overla
 const buttonUploadCancelElement = imgUploadFormElement.querySelector('.img-upload__cancel');
 const effectsElement = imgUploadFormElement.querySelector('.img-upload__effects');
 
-//Функция-обработчик закрытия формы по ESC
 const onDocumentKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
@@ -31,10 +30,8 @@ const onDocumentKeydown = (evt) => {
   }
 };
 
-//Функция закрытия формы по нажатию на кнопку
 const onCloseButtonClick = () => closeUploadForm();
 
-//Закрытие формы загрузки
 function closeUploadForm() {
   imgUploadOverlay.classList.add('hidden');
   bodyElement.classList.remove('modal-open');
@@ -44,7 +41,6 @@ function closeUploadForm() {
   resetValidator();
 }
 
-//Открытие формы загрузки
 const openUploadForm = () => {
   imgUploadFormInputElement.addEventListener('change', () => {
     imgUploadOverlay.classList.remove('hidden');

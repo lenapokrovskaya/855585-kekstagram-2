@@ -55,7 +55,6 @@ const effectsOptions = {
   },
 };
 
-//Редактирование масштаба фото
 let currentScale = Number(scaleControlInputElement.value.slice(0, -1));
 
 const updateCurrentScale = () => {
@@ -81,7 +80,6 @@ const onBiggerControlClick = () => {
   }
 };
 
-//Создание слайдера
 noUiSlider.create(sliderElement, {
   range: {
     min: 1,
@@ -105,7 +103,6 @@ noUiSlider.create(sliderElement, {
 
 sliderContainerElement.classList.add('hidden');
 
-//Функция для обновления настроек эффекта
 const updateSliderOptions = (effectOptions) => {
   sliderElement.noUiSlider.updateOptions({
     range: {
@@ -117,13 +114,11 @@ const updateSliderOptions = (effectOptions) => {
   });
 };
 
-//Функция обновления стилей эффекта
 const updateSliderValue = (cssProperty, cssUnit) => {
   imageElement.style.setProperty('filter', `${cssProperty}(${effectValueElement.value}${cssUnit})`);
 
 };
 
-//Функция применения настроек эффекта
 const onSliderEffectsChange = (evt) => {
   const checkedEffectButton = evt.target.closest('.effects__radio');
   if (checkedEffectButton.value !== 'none') {
@@ -135,7 +130,6 @@ const onSliderEffectsChange = (evt) => {
   }
 };
 
-//Обновение значений при перестаскивании ползунка
 sliderElement.noUiSlider.on('update', () => {
   effectValueElement.value = sliderElement.noUiSlider.get();
   effectsButtonElements.forEach((button) => {
@@ -147,7 +141,6 @@ sliderElement.noUiSlider.on('update', () => {
   });
 });
 
-//Функция сброса фоторедактора
 const resetPhotoEditor = () => {
   currentScale = MAX_SCALE;
   imageElement.style.setProperty('transform', 'scale(1)');
