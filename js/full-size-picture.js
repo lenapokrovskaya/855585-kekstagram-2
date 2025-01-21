@@ -1,4 +1,5 @@
 import {renderComments} from './comments.js';
+
 const bigPictureElement = document.body.querySelector('.big-picture');
 const imageElement = bigPictureElement.querySelector('img');
 const likesElement = bigPictureElement.querySelector('.likes-count');

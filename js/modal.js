@@ -7,7 +7,6 @@ const renderModal = (posts) => {
   const picturesParentElement = document.querySelector('.pictures');
   const pictureCloseButtonElement = bigPictureElement.querySelector('.big-picture__cancel');
 
-
   //Функция-обработчик закрытия модалки ESC
   const onModalEscKeyDown = (evt) => {
     if (isEscapeKey(evt)) {

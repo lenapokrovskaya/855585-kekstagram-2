@@ -17,48 +17,68 @@ const showDataError = (error) => {
   bodyElement.append(fragmentElement);
 };
 
-// Функция для удаления сообщения
-const closeMessageBox = (element) => {
-  if (element) {
-    element.remove(); // Удаляем элемент
-  }
+// Функция для удаления сообщения и обработчиков
+const closeMessageBox = (element, onEscClick, onOverlayClick) => {
+  element.remove();
+  document.removeEventListener('keydown', onEscClick);
+  document.removeEventListener('click', onOverlayClick);
 };
 
 // Обработчик закрытия окна сообщения по клику
-const onClickCloseMessage = (element) => {
-  closeMessageBox(element);
+const onClickCloseMessage = (element, onEscClick, onOverlayClick) => {
+  closeMessageBox(element, onEscClick, onOverlayClick);
 };
 
 // Обработчик закрытия окна сообщения по Esc
-const onEscCloseMessage = (evt, element) => {
-  if(isEscapeKey(evt)) {
-    closeMessageBox(element);
+function onEscCloseMessage(evt, element, onEscClick, onOverlayClick) {
+  if (isEscapeKey(evt)) {
+    closeMessageBox(element, onEscClick, onOverlayClick);
   }
-};
+}
 
 // Обработчик закрытия окна сообщения по нажатию на оверлэй
-const onOverlayClick = (evt, messageBlock, element) => {
-  if(!messageBlock.contains(evt.target)) {
-    closeMessageBox(element);
+function onOverlayCloseMessage(evt, messageBlock, element, onEscClick, onOverlayClick) {
+  if (!messageBlock.contains(evt.target)) {
+    closeMessageBox(element, onEscClick, onOverlayClick);
   }
-};
+}
 
-//Показ сообщения об ошибке отправки данных
+// Показ сообщения об ошибке
 const showError = () => {
   fragmentElement.appendChild(errorElement);
   bodyElement.append(fragmentElement);
-  errorButtonElement.addEventListener('click', () => onClickCloseMessage(errorElement));
-  document.addEventListener('keydown', (evt) => onEscCloseMessage(evt, errorElement));
-  document.addEventListener('click', (evt) => onOverlayClick(evt, errorBlockElement, errorElement));
+
+  // Обработчики для Esc и клика на оверлэй
+  function onEscClick(evt) {
+    onEscCloseMessage(evt, errorElement, onEscClick, onOverlayClick);
+  }
+
+  function onOverlayClick(evt) {
+    onOverlayCloseMessage(evt, errorBlockElement, errorElement, onEscClick, onOverlayClick);
+  }
+
+  errorButtonElement.addEventListener('click', () => onClickCloseMessage(errorElement, onEscClick, onOverlayClick));
+  document.addEventListener('keydown', onEscClick);
+  document.addEventListener('click', onOverlayClick);
 };
 
-//Показ сообщения об успехе отправки данных
+// Показ сообщения об успехе
 const showSuccess = () => {
   fragmentElement.appendChild(successElement);
   bodyElement.append(fragmentElement);
-  successButtonElement.addEventListener('click', () => onClickCloseMessage(successElement));
-  document.addEventListener('keydown', (evt) => onEscCloseMessage(evt, successElement));
-  document.addEventListener('click', (evt) => onOverlayClick(evt, successBlockElement, successElement));
+
+  // Обработчики для Esc и клика на оверлэй
+  function onEscClick(evt) {
+    onEscCloseMessage(evt, successElement, onEscClick, onOverlayClick);
+  }
+
+  function onOverlayClick(evt) {
+    onOverlayCloseMessage(evt, successBlockElement, successElement, onEscClick, onOverlayClick);
+  }
+
+  successButtonElement.addEventListener('click', () => onClickCloseMessage(successElement, onEscClick, onOverlayClick));
+  document.addEventListener('keydown', onEscClick);
+  document.addEventListener('click', onOverlayClick);
 };
 
 export {showDataError, showError, showSuccess};

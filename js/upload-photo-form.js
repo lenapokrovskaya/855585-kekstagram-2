@@ -1,6 +1,6 @@
 import {isEscapeKey} from './util.js';
 import {onSliderEffectsChange, resetPhotoEditor} from './photo-editor.js';
-import { resetValidator } from './form-validation.js';
+import {resetValidator, setUserFormSubmit} from './form-validation.js';
 
 const bodyElement = document.body;
 const imgUploadFormElement = bodyElement.querySelector('.img-upload__form');
@@ -11,7 +11,7 @@ const imgUploadOverlay = imgUploadFormElement.querySelector('.img-upload__overla
 const buttonUploadCancelElement = imgUploadFormElement.querySelector('.img-upload__cancel');
 const effectsElement = imgUploadFormElement.querySelector('.img-upload__effects');
 
-//!!Функция-обработчик закрытия формы по ESC
+//Функция-обработчик закрытия формы по ESC
 const onDocumentKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
@@ -31,15 +31,15 @@ const onDocumentKeydown = (evt) => {
   }
 };
 
-//!!Функция закрытия формы по нажатию на кнопку
+//Функция закрытия формы по нажатию на кнопку
 const onCloseButtonClick = () => closeUploadForm();
 
 //Закрытие формы загрузки
 function closeUploadForm() {
-  imgUploadOverlay.classList.add('hidden');//
-  bodyElement.classList.remove('modal-open');//
-  document.removeEventListener('keydown', onDocumentKeydown);//
-  buttonUploadCancelElement.removeEventListener('click', onCloseButtonClick);//
+  imgUploadOverlay.classList.add('hidden');
+  bodyElement.classList.remove('modal-open');
+  document.removeEventListener('keydown', onDocumentKeydown);
+  buttonUploadCancelElement.removeEventListener('click', onCloseButtonClick);
   resetPhotoEditor();
   resetValidator();
 }
@@ -47,8 +47,9 @@ function closeUploadForm() {
 //Открытие формы загрузки
 const openUploadForm = () => {
   imgUploadFormInputElement.addEventListener('change', () => {
-    imgUploadOverlay.classList.remove('hidden');//
-    bodyElement.classList.add('modal-open');//
+    imgUploadOverlay.classList.remove('hidden');
+    bodyElement.classList.add('modal-open');
+    imgUploadFormElement.addEventListener('submit', setUserFormSubmit);
     document.addEventListener('keydown', onDocumentKeydown);
     buttonUploadCancelElement.addEventListener('click', onCloseButtonClick);
     effectsElement.addEventListener('change', onSliderEffectsChange);

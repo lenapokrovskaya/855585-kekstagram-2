@@ -1,5 +1,6 @@
 import {sendData} from './api.js';
 import {showError, showSuccess} from './notifications.js';
+import {closeUploadForm} from './upload-photo-form.js';
 
 const MAX_HASHTAGS = 5;
 const MAX_COMMENT_LENGTH = 140;
@@ -14,7 +15,6 @@ const hashtagsInputElement = imgUploadFormElement.querySelector('.text__hashtags
 const descriptionInutElement = imgUploadFormElement.querySelector('.text__description');
 const hashtagRegex = /^#[a-zа-яё0-9]{1,19}$/i;
 
-
 //Создали объект и передали конфиг
 const pristine = new Pristine(imgUploadFormElement, {
   classTo: 'img-upload__field-wrapper',
@@ -25,7 +25,7 @@ const pristine = new Pristine(imgUploadFormElement, {
 //Проверка длины комментария
 const validatesCommentLength = (value) => value.length >= 0 && value.length <= MAX_COMMENT_LENGTH;
 
-const getValues = (value) => value.trim().split(' ');
+const getValues = (value) => value.trim().split(/ +/g);
 
 //Проверка валиден ли хэштег
 const validatesHashtagWithRegex = (value) => {
@@ -52,27 +52,25 @@ const unblockSubmitButton = () => {
   submitButtonElement.disabled = false;
 };
 
-const setUserFormSubmit = (onSuccess) => {
-  imgUploadFormElement.addEventListener('submit', (evt) => {
-    evt.preventDefault();
-    const isValid = pristine.validate(); // Проверка валидности формы
+const setUserFormSubmit = (evt) => {
+  evt.preventDefault();
+  const isValid = pristine.validate();
 
-    if (isValid) {
-      blockSubmitButton();
-      const formData = new FormData(evt.target);
-      const sendDataPromise = sendData(formData);
-      sendDataPromise
-        .then(() => {
-          imgUploadFormElement.reset();
-          showSuccess();
-          onSuccess();
-        })
-        .catch(() => {
-          showError(errorElement);
-        })
-        .finally(unblockSubmitButton);
-    }
-  });
+  if (isValid) {
+    blockSubmitButton();
+    const formData = new FormData(evt.target);
+    const sendDataPromise = sendData(formData);
+    sendDataPromise
+      .then(() => {
+        imgUploadFormElement.reset();
+        showSuccess();
+        closeUploadForm();
+      })
+      .catch(() => {
+        showError(errorElement);
+      })
+      .finally(unblockSubmitButton);
+  }
 };
 
 const resetValidator = () => pristine.reset();

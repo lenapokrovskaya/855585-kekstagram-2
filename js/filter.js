@@ -8,12 +8,12 @@ const RERENDER_DELAY = 500;
 const imgFiltersForm = document.querySelector('.img-filters__form');
 const buttonsElements = imgFiltersForm.querySelectorAll('.img-filters__button');
 
-const updatePosts = (posts) => {
+const updatePosts = debounce((posts) => {
   const pictureElements = document.querySelectorAll('.picture');
   pictureElements.forEach((el) => el.remove());
   createFragment(posts);
   renderModal(posts);
-};
+}, RERENDER_DELAY);
 
 const onChangeFilterPosts = (pictures) => {
   imgFiltersForm.addEventListener('click', (evt) => {
@@ -24,15 +24,15 @@ const onChangeFilterPosts = (pictures) => {
 
       switch (evt.target.id) {
         case 'filter-default':
-          debounce(() => updatePosts(pictures), RERENDER_DELAY)();
+          updatePosts(pictures);
           break;
 
         case 'filter-random':
-          debounce(() => updatePosts(pictures.toSorted(() => 0.5 - Math.random()).slice(0, POST_COUNT)), RERENDER_DELAY)();
+          updatePosts(pictures.toSorted(() => 0.5 - Math.random()).slice(0, POST_COUNT));
           break;
 
         case 'filter-discussed':
-          debounce(() => updatePosts(pictures.toSorted((pictureA, pictureB) => pictureB.comments.length - pictureA.comments.length)), RERENDER_DELAY)();
+          updatePosts(pictures.toSorted((pictureA, pictureB) => pictureB.comments.length - pictureA.comments.length));
           break;
       }
     }
@@ -40,3 +40,4 @@ const onChangeFilterPosts = (pictures) => {
 };
 
 export {onChangeFilterPosts};
+
