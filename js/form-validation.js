@@ -75,4 +75,5 @@ pristine.addValidator(hashtagsInputElement, validatesHashtagWithRegex, 'Введ
 pristine.addValidator(hashtagsInputElement, validatesHashtagRepeats, 'Хэштеги повторяются');
 pristine.addValidator(descriptionInutElement, validatesCommentLength, `Длина комментария больше ${MAX_COMMENT_LENGTH} символов`);
 
+
 export {setUserFormSubmit, resetValidator};

@@ -37,6 +37,7 @@ function closeUploadForm() {
   bodyElement.classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeydown);
   buttonUploadCancelElement.removeEventListener('click', onCloseButtonClick);
+  imgUploadFormElement.removeEventListener('submit', setUserFormSubmit);
   resetPhotoEditor();
   resetValidator();
 }
