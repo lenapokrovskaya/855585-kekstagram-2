@@ -20,7 +20,7 @@ const renderComment = ({avatar, name, message}) => {
   return clonedCommentElement;
 };
 
-const renderShownComments = () => {
+const onCommentsLoaderClick = () => {
   const fragmentElement = document.createDocumentFragment();
   const shownComments = currentPostComments.slice(currentCommentCount, currentCommentCount + STEP_COMMENTS);
   const shownCommentsLength = shownComments.length + currentCommentCount;
@@ -39,15 +39,15 @@ const renderShownComments = () => {
 
 const renderComments = (comments) => {
   currentPostComments = comments;
-  renderShownComments();
-  commentsLoaderElement.addEventListener('click', renderShownComments);
+  onCommentsLoaderClick();
+  commentsLoaderElement.addEventListener('click', onCommentsLoaderClick);
 };
 
 const clearComments = () => {
   currentCommentCount = 0;
   socialCommentsElement.innerHTML = '';
   commentsLoaderElement.classList.remove('hidden');
-  commentsLoaderElement.removeEventListener('click', renderShownComments);
+  commentsLoaderElement.removeEventListener('click', onCommentsLoaderClick);
 };
 
 export {renderComments, clearComments};

@@ -47,7 +47,7 @@ const unblockSubmitButton = () => {
   submitButtonElement.disabled = false;
 };
 
-const setUserFormSubmit = (evt) => {
+const onUserFormSubmit = (evt) => {
   evt.preventDefault();
   const isValid = pristine.validate();
 
@@ -76,4 +76,4 @@ pristine.addValidator(hashtagsInputElement, validatesHashtagRepeats, 'Хэште
 pristine.addValidator(descriptionInutElement, validatesCommentLength, `Длина комментария больше ${MAX_COMMENT_LENGTH} символов`);
 
 
-export {setUserFormSubmit, resetValidator};
+export {onUserFormSubmit, resetValidator};
